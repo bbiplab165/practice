@@ -11,3 +11,16 @@ tag5[4].style.paddingLeft="20px"
 tag5[4].style.backgroundColor="lightgray"
 tag5[4].style.fontWeight="bold"
 
+const list=document.querySelectorAll("li")
+// list[1].style.backgroundColor="green"
+list[2].style.visibility="hidden"
+list[1].style.color="lightgreen"
+console.log(list.length);
+for(let i=0;i<list.length;i++)
+{
+    if(i%2==0)
+    {
+        list[i].style.backgroundColor="green"
+    }
+    
+}
