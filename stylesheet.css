@@ -1,0 +1,50 @@
+body {
+    background-color: #EAF6F6;
+    text-align: center;
+    margin: 0%;
+    padding: 0%;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.top-cloud {
+    position: relative;
+    left: 350px;
+    top: 50px;
+}
+
+span {
+    text-decoration: underline;
+}
+
+h1 {
+    font-family: 'Sacramento', cursive;
+    color: #66BFBF;
+    font-size: 90px;
+    margin-bottom: 0;
+}
+
+h3 {
+    color: #66BFBF;
+    font-size: 22px;
+}
+
+.bottom-cloud {
+    position: absolute;
+    left: 400px;
+}
+
+.bottom {
+    margin-bottom: 100px;
+}
+
+.computer {
+    margin-top: 100px;
+    width: 200px;
+}
+
+hr {
+    border: dotted;
+    color: #82AAE3;
+    border-bottom: none;
+    width: 4%;
+}
