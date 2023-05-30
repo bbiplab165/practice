@@ -47,6 +47,11 @@ function addItem(e) {
     li.appendChild(delButton);
 
     item.appendChild(li);
+    
+    let storedItems = localStorage.getItem("items");
+    let items = storedItems ? JSON.parse(storedItems) : [];
+    items.push(enterValue);
+    localStorage.setItem("items", JSON.stringify(items));
 }
 
 function deleteButton(e) {
