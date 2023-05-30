@@ -44,10 +44,27 @@ function addItem(e) {
     let delButton = document.createElement("button");
     delButton.className = "btn btn-danger btn-sm float-right delete";
     delButton.appendChild(document.createTextNode("X"));
+
+    delButton.addEventListener("click", function() {
+        // Remove the associated <li> from the DOM
+        li.remove();
+    
+        // Remove the item from the local storage
+        let storedItems = localStorage.getItem("items");
+        if (storedItems) {
+            let items = JSON.parse(storedItems);
+            let index = items.indexOf(enterValue);
+            if (index !== -1) {
+                items.splice(index, 1);
+                localStorage.setItem("items", JSON.stringify(items));
+            }
+        }
+    });
+    
     li.appendChild(delButton);
 
     item.appendChild(li);
-    
+
     let storedItems = localStorage.getItem("items");
     let items = storedItems ? JSON.parse(storedItems) : [];
     items.push(enterValue);
