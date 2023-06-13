@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="addform">
+        <ul>
+            <li>
+                <label for="expense">Choose Expense</label>
+                <input type="text" id="expense" name="expense">
+            </li>
+            <li>
+                <label for="description">Choose Description</label>
+                <input type="text" id="description" name="description">
+            </li>
+            <li>
+                <label for="category">Choose a Category</label>
+                <select id="category" name="category">
+                    <option value="">-- Select Category --</option>
+                    <option value="food">Food</option>
+                    <option value="fuel">Fuel</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="movie">Movie</option>
+                </select>
+            </li>
+        </ul>
+        <br />
+        <br />
+        <br />
+        <button type="submit" id="button">Add Expense</button>
+        <br />
+        <br />
+    </form>
+
+    <ul id="item">
+        <li class="list-group-item">------------Your Expences--------</li>
+    </ul>
+</body>
+<script src="script.js"></script>
+
+</html>
