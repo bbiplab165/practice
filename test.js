@@ -58,7 +58,7 @@ function addItems(e) {
 
     const enterValue2 = { expense, description, category }
     let storedData = []
-    axios.post("https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user", enterValue2)
+    axios.post("https://crudcrud.com/api/5916111abdc5446c86c469b76c8caf09/user", enterValue2)
         .then((response) => {
             console.log(response)
             storedData = response.data
@@ -78,7 +78,7 @@ function addItems(e) {
                 deleteBtn.addEventListener("click", function () {
                     li.remove();
                     const id = i._id
-                    axios.delete(`https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user/${id}`)
+                    axios.delete(`https://crudcrud.com/api/5916111abdc5446c86c469b76c8caf09/user/${id}`)
                 });
                 li.appendChild(editBtn);
                 li.appendChild(deleteBtn);
@@ -91,7 +91,7 @@ function addItems(e) {
 
 function loadStoredData() {
     let storedData = []
-    axios.get("https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user")
+    axios.get("https://crudcrud.com/api/5916111abdc5446c86c469b76c8caf09/user")
         .then((response) => {
 
             storedData = response.data
@@ -111,8 +111,8 @@ function loadStoredData() {
                 deleteBtn.addEventListener("click", function () {
                     li.remove();
                     const id = i._id
-                    axios.delete(`https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user/${id}`)
-                
+                    axios.delete(`https://crudcrud.com/api/5916111abdc5446c86c469b76c8caf09/user/${id}`)
+
                 });
 
                 let editBtn = document.createElement("button");
@@ -125,14 +125,19 @@ function loadStoredData() {
 
                     if (newExpense && newDescription && newCategory) {
                         let updatedValue = newExpense + " - " + newDescription + " - " + newCategory;
-                        li.firstChild.textContent = updatedValue;
-
-                        let data = JSON.parse(localStorage.getItem("items")) || [];
-                        let index = data.indexOf(item);
-                        if (index !== -1) {
-                            data[index] = updatedValue;
-                            localStorage.setItem("items", JSON.stringify(data));
-                        }
+                        const id = i._id;
+                        axios.patch(`https://crudcrud.com/api/5916111abdc5446c86c469b76c8caf09/user/${id}`, {
+                            expense: newExpense,
+                            description: newDescription,
+                            category: newCategory
+                        })
+                            .then((response) => {
+                                console.log(response);
+                                const updatedItem = response.data;
+                                const updatedValue = `${updatedItem.expense} - ${updatedItem.description} - ${updatedItem.category}`;
+                                li.firstChild.textContent = updatedValue;
+                            })
+                            .catch((err) => console.log(err));
                     }
                 });
 
