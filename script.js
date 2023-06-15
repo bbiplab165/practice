@@ -74,7 +74,16 @@ function addItems(e) {
 }
 
 function loadStoredData() {
-    let storedData = JSON.parse(localStorage.getItem("items")) || [];
+    let storedData=[]
+    axios.get("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
+    .then((response)=> {
+        console.log(response.data)
+        storedData=response.data
+    })
+    .catch((err)=>console.log(err))
+
+
+    // let storedData = JSON.parse(localStorage.getItem("items")) || [];
     storedData.forEach(function (i) {
         const li = document.createElement("li");
         li.appendChild(document.createTextNode(i));
