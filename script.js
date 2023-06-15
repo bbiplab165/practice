@@ -15,26 +15,28 @@ function addItems(e) {
     const description = document.getElementById("description").value;
     const category = document.getElementById("category").value;
 
-    const enterValue = expense + " - " + description + " - " + category;
+    // const enterValue = expense + " - " + description + " - " + category;
 
-    const li = document.createElement("li");
-    li.appendChild(document.createTextNode(enterValue));
+    // const li = document.createElement("li");
+    // li.appendChild(document.createTextNode(enterValue));
 
     let deleteBtn = document.createElement("button");
     deleteBtn.appendChild(document.createTextNode("Delete Expense"));
 
     // Delete button
-    deleteBtn.addEventListener("click", function () {
-        li.remove();
+    // deleteBtn.addEventListener("click", function () {
+    //     li.remove();
+    //     const id=i._id
+    //     axios.delete(`https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user/${id}`)
 
-        let data = JSON.parse(localStorage.getItem("items")) || [];
-        let index = data.indexOf(enterValue);
-        if (index !== -1) {
-            data.splice(index, 1);
-            // localStorage.setItem("items", JSON.stringify(data));
-            // axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
-        }
-    });
+    //     // let data = JSON.parse(localStorage.getItem("items")) || [];
+    //     // let index = data.indexOf(enterValue);
+    //     // if (index !== -1) {
+    //     //     data.splice(index, 1);
+    //     //     // localStorage.setItem("items", JSON.stringify(data));
+    //     //     // axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
+    //     // }
+    // });
 
     // Edit button
     let editBtn = document.createElement("button");
@@ -49,82 +51,98 @@ function addItems(e) {
             let updatedValue = newExpense + " - " + newDescription + " - " + newCategory;
             li.firstChild.textContent = updatedValue;
 
-            let data = JSON.parse(localStorage.getItem("items")) || [];
-            let index = data.indexOf(enterValue);
-            if (index !== -1) {
-                data[index] = updatedValue;
-                // localStorage.setItem("items", JSON.stringify(data));
-                // axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
-            }
+
         }
     });
 
-    li.appendChild(editBtn);
-    li.appendChild(deleteBtn);
-    item.appendChild(li);
 
-    let storedData = JSON.parse(localStorage.getItem("items")) || [];
-    storedData.push(enterValue);
-    // localStorage.setItem("items", JSON.stringify(storedData));
+    const enterValue2 = { expense, description, category }
+    let storedData = []
+    axios.post("https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user", enterValue2)
+        .then((response) => {
+            console.log(response)
+            storedData = response.data
+            console.log(storedData.length);
 
-    const enterValue2 = {expense ,description , category}
-    axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user",enterValue2)
-    .then((response)=> console.log(response))
-    .catch((err)=>console.log(err))
+            storedData.forEach(function (i) {
+                console.log(i._id)
+
+                const data = i.expense + " - " + i.description + " - " + i.category
+
+                const li = document.createElement("li");
+                li.appendChild(document.createTextNode(data));
+
+                let deleteBtn = document.createElement("button");
+                deleteBtn.appendChild(document.createTextNode("Delete Expense"));
+
+                deleteBtn.addEventListener("click", function () {
+                    li.remove();
+                    const id = i._id
+                    axios.delete(`https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user/${id}`)
+                });
+                li.appendChild(editBtn);
+                li.appendChild(deleteBtn);
+                item.appendChild(li);
+
+            })
+        })
+        .catch((err) => console.log(err))
 }
 
 function loadStoredData() {
-    let storedData=[]
-    axios.get("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
-    .then((response)=> {
-        console.log(response.data)
-        storedData=response.data
-    })
-    .catch((err)=>console.log(err))
+    let storedData = []
+    axios.get("https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user")
+        .then((response) => {
 
+            storedData = response.data
+            console.log(storedData.length);
 
-    // let storedData = JSON.parse(localStorage.getItem("items")) || [];
-    storedData.forEach(function (i) {
-        const li = document.createElement("li");
-        li.appendChild(document.createTextNode(i));
+            storedData.forEach(function (i) {
+                console.log(i._id)
 
-        let deleteBtn = document.createElement("button");
-        deleteBtn.appendChild(document.createTextNode("Delete Expense"));
+                const data = i.expense + " - " + i.description + " - " + i.category
 
-        deleteBtn.addEventListener("click", function () {
-            li.remove();
+                const li = document.createElement("li");
+                li.appendChild(document.createTextNode(data));
 
-            let data = JSON.parse(localStorage.getItem("items")) || [];
-            let index = data.indexOf(i);
-            if (index !== -1) {
-                data.splice(index, 1);
-                localStorage.setItem("items", JSON.stringify(data));
-            }
-        });
+                let deleteBtn = document.createElement("button");
+                deleteBtn.appendChild(document.createTextNode("Delete Expense"));
 
-        let editBtn = document.createElement("button");
-        editBtn.appendChild(document.createTextNode("Edit Button"));
+                deleteBtn.addEventListener("click", function () {
+                    li.remove();
+                    const id = i._id
+                    axios.delete(`https://crudcrud.com/api/6e4d6de80b41438e921eca5e0dbc3601/user/${id}`)
+                
+                });
 
-        editBtn.addEventListener("click", function () {
-            let newExpense = prompt("Enter new expense");
-            let newDescription = prompt("Enter new description");
-            let newCategory = prompt("Enter new category");
+                let editBtn = document.createElement("button");
+                editBtn.appendChild(document.createTextNode("Edit Button"));
 
-            if (newExpense && newDescription && newCategory) {
-                let updatedValue = newExpense + " - " + newDescription + " - " + newCategory;
-                li.firstChild.textContent = updatedValue;
+                editBtn.addEventListener("click", function () {
+                    let newExpense = prompt("Enter new expense");
+                    let newDescription = prompt("Enter new description");
+                    let newCategory = prompt("Enter new category");
 
-                let data = JSON.parse(localStorage.getItem("items")) || [];
-                let index = data.indexOf(item);
-                if (index !== -1) {
-                    data[index] = updatedValue;
-                    localStorage.setItem("items", JSON.stringify(data));
-                }
-            }
-        });
+                    if (newExpense && newDescription && newCategory) {
+                        let updatedValue = newExpense + " - " + newDescription + " - " + newCategory;
+                        li.firstChild.textContent = updatedValue;
 
-        li.appendChild(editBtn);
-        li.appendChild(deleteBtn);
-        item.appendChild(li);
-    });
+                        let data = JSON.parse(localStorage.getItem("items")) || [];
+                        let index = data.indexOf(item);
+                        if (index !== -1) {
+                            data[index] = updatedValue;
+                            localStorage.setItem("items", JSON.stringify(data));
+                        }
+                    }
+                });
+
+                li.appendChild(editBtn);
+                li.appendChild(deleteBtn);
+                item.appendChild(li);
+            });
+        })
+        .catch((err) => console.log(err))
+
+    console.log(storedData);
+
 }
