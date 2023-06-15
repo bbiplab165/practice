@@ -31,7 +31,8 @@ function addItems(e) {
         let index = data.indexOf(enterValue);
         if (index !== -1) {
             data.splice(index, 1);
-            localStorage.setItem("items", JSON.stringify(data));
+            // localStorage.setItem("items", JSON.stringify(data));
+            // axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
         }
     });
 
@@ -52,7 +53,8 @@ function addItems(e) {
             let index = data.indexOf(enterValue);
             if (index !== -1) {
                 data[index] = updatedValue;
-                localStorage.setItem("items", JSON.stringify(data));
+                // localStorage.setItem("items", JSON.stringify(data));
+                // axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user")
             }
         }
     });
@@ -63,7 +65,12 @@ function addItems(e) {
 
     let storedData = JSON.parse(localStorage.getItem("items")) || [];
     storedData.push(enterValue);
-    localStorage.setItem("items", JSON.stringify(storedData));
+    // localStorage.setItem("items", JSON.stringify(storedData));
+
+    const enterValue2 = {expense ,description , category}
+    axios.post("https://crudcrud.com/api/5bdfba8a52ae411f91f9f616b69bce81/user",enterValue2)
+    .then((response)=> console.log(response))
+    .catch((err)=>console.log(err))
 }
 
 function loadStoredData() {
