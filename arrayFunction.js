@@ -1,11 +1,10 @@
-const arr = ['apple', 'oranges', ' ', 'mango', ' ', 'lemon']
-const newArr = arr.map((i) => {
-    if (i == " ") {
-        return "empty string"
-    }
-    else {
-        return i
-    }
-})
-console.log(newArr)
+const http = require("http")
 
+const server = http.createServer((req, res) => {
+    res.end("Hello\n");
+
+})
+
+server.listen(4000, () => {
+    console.log("Server connected")
+})
