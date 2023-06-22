@@ -1,13 +1,11 @@
-const product=(a,b)=>{
-    return a*b;
-}
-console.log(product(5,4))
+const arr = ['apple', 'oranges', ' ', 'mango', ' ', 'lemon']
+const newArr = arr.map((i) => {
+    if (i == " ") {
+        return "empty string"
+    }
+    else {
+        return i
+    }
+})
+console.log(newArr)
 
-
-const student={
-    name:"Raj",
-    age:30,
-    email: "zzz@gmail.com"
-}
-
-console.log(student)
