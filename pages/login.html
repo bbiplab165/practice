@@ -1,0 +1,29 @@
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault()
+            const data = document.getElementById('userName').value
+            console.log(data)
+            const localData = JSON.parse(localStorage.getItem('userName'))||[];
+            const updatedData = [ ...localData, data ]
+            localStorage.setItem('userName', JSON.stringify(updatedData));
+        }
+    </script>
+</head>
+
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <label>User Name</label>
+        <input type="text" name="userName" id="userName" />
+        <button type="submit">submit</button>
+    </form>
+</body>   
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>your messages</h1>
+    <ul id="items">
+        
+    </ul>
+    <form>
+        <label>Write Here</label>
+        <input type="text" id="message" />
+        <button type="submit" id="submit">Submit</button>
+    </form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<!-- <script src='message.js'></script> -->
+<script>
+    const submit = document.getElementById('submit')
+    window.addEventListener("load", fetchData);
+    submit.addEventListener('click', handleSubmit)
+
+    const URL = "https://crudcrud.com/api/c36a828399034b2e98eeeb4fa2353221/message"
+    async function handleSubmit(e) {
+        try {
+
+            e.preventDefault()
+            const message = document.getElementById('message').value
+            console.log(message);
+
+            await saveData(message)
+        }
+        catch (err) {
+            console.log("Error : ", err);
+        }
+    }
+    async function saveData(data) {
+        try {
+            console.log(data);
+            await axios.post(URL, { data })
+            console.log('Saved data');
+            fetchData()
+        }
+        catch (err) {
+            console.log("Error : ", err);
+        }
+    }
+    async function fetchData() {
+        try {
+            const message = await axios.get(URL)
+            const data = message.data
+            console.log(data);
+            const items = document.getElementById('items');
+            items.innerHTML = '';
+            for (const item of data) {
+                detail(item);
+            }
+        }
+        catch (err) {
+            console.log("Error : ", err);
+        }
+    }
+    function detail(data) {
+        try {
+            console.log(data);
+            const items = document.getElementById('items')
+
+            const li = document.createElement("li")
+            li.textContent = data.data
+            items.appendChild(li)
+        }
+        catch (err) {
+            console.log("Error : ", err);
+        }
+    }
+</script>
+
+</html>
