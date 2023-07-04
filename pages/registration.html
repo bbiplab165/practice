@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Appointment APP</title>
+</head>
+
+<body>
+    <h1>Booking Appointment APP</h1>
+    <form action="/create" method="POST">
+        <label>Name</label>
+        <input type="text" id="name" name="name">
+        <label>Phone Number</label>
+        <input type="number" id="number" name="phoneNumber">
+        <label>Email</label>
+        <input type="text" id="email" name="email">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
+
+
+<!-- <script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        const name=document.getElementById('name').value
+        const PhoneNumber=document.getElementById('number').value
+        const email=document.getElementById('email').value
+        console.log(name,PhoneNumber,email)
+        //window.location.href = "/create";
+    }
+</script> -->
